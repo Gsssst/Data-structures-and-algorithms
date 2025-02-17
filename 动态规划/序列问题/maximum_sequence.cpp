@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
     long long n;
-    while (cin>>n) { // 注意 while 处理多个 case
+    while (cin>>n) { 
         vector<long long> dp(n+1,0);
         long long ans = -INT_MAX;
         for(int i=0;i<n;i++){
