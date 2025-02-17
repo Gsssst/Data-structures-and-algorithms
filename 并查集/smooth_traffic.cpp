@@ -5,7 +5,7 @@ using namespace std;
 vector<int> mp(1001,0);
 
 void init(int n){
-    for(int i=0;i<n;i++){
+    for(int i=1;i<=n;i++){
         mp[i] = i;
     }
 }
@@ -35,7 +35,7 @@ int main() {
             uniontree(a,b);
         }
         int cnt=0;
-        for(int i=0;i<n;i++){
+        for(int i=1;i<=n;i++){
             if(getroot(i)==i) cnt++;
         }
         cout<<cnt-1<<endl;
