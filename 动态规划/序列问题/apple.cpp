@@ -10,7 +10,7 @@ int f(int m,int n){
 
 int main() {
     int m,n;
-    while (cin >> m >> n) { // 注意 while 处理多个 case
+    while (cin >> m >> n) { 
         cout<<f(m,n)<<endl;
     }
 }
