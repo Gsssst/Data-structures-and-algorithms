@@ -16,7 +16,7 @@ public:
     angle(int d){
         degree = d;
     }
-    angle operator-(angle b)
+    angle operator-(const angle& b)const
     {
         angle c;
         c.degree = degree-b.degree;
