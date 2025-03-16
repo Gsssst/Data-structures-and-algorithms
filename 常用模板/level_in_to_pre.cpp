@@ -8,7 +8,7 @@ string inorder,levelorder;
 
 void getpreorder(int al,int ar,int bl,int br){
     int i,j;
-    for(i=bl;i<=br;i++){
+    for(i=bl;i<=br;i++){//找层次遍历与中序遍历中第一个相同的点，该点为前序遍历当前访问结点
         bool flag = false;
         for(j=al;j<=ar;j++){
             if(inorder[j]==levelorder[i]){
