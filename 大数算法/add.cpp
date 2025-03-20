@@ -5,34 +5,69 @@
 
 using namespace std;
 
-string f(string a,string b){
-    reverse(a.begin(),a.end());
-    reverse(b.begin(),b.end());
-    int n = max(a.size(),b.size());
-    string str1;
-    int i=0;
-    int j=0;
-    while(i<n){
-        int temp = 0;
-        temp+=j;
-        if(a.size()>i){
-            temp += (a[i]-'0');
-        }
-        if(b.size()>i){
-            temp += (b[i]-'0');
-        }
-        if(temp<10){
-            str1+=to_string(temp);
-            j = 0;
-        }else {
-            str1+=to_string(temp%10);
-            j = 1;
-        }
-        i++;
+vector<int> add(vector<int> &A, vector<int> &B)
+{
+    if (A.size() < B.size()) return add(B, A);
+
+    vector<int> C;
+    int t = 0;
+    for (int i = 0; i < A.size(); i ++ )
+    {
+        t += A[i];
+        if (i < B.size()) t += B[i];
+        C.push_back(t % 10);
+        t /= 10;
     }
-    if(j==1) str1+='1';
-    reverse(str1.begin(),str1.end());
-    return str1;
+
+    if (t) C.push_back(t);
+    return C;
+}
+vector<int> sub(vector<int> &A, vector<int> &B)
+{
+    vector<int> C;
+    for (int i = 0, t = 0; i < A.size(); i ++ )
+    {
+        t = A[i] - t;
+        if (i < B.size()) t -= B[i];
+        C.push_back((t + 10) % 10);
+        if (t < 0) t = 1;
+        else t = 0;
+    }
+
+    while (C.size() > 1 && C.back() == 0) C.pop_back();
+    return C;
+}
+// C = A * b, A >= 0, b >= 0
+vector<int> mul(vector<int> &A, int b)
+{
+    vector<int> C;
+
+    int t = 0;
+    for (int i = 0; i < A.size() || t; i ++ )
+    {
+        if (i < A.size()) t += A[i] * b;
+        C.push_back(t % 10);
+        t /= 10;
+    }
+
+    while (C.size() > 1 && C.back() == 0) C.pop_back();
+
+    return C;
+}
+// A / b = C ... r, A >= 0, b > 0
+vector<int> div(vector<int> &A, int b, int &r)
+{
+    vector<int> C;
+    r = 0;
+    for (int i = A.size() - 1; i >= 0; i -- )
+    {
+        r = r * 10 + A[i];
+        C.push_back(r / b);
+        r %= b;
+    }
+    reverse(C.begin(), C.end());
+    while (C.size() > 1 && C.back() == 0) C.pop_back();
+    return C;
 }
 
 int main(){
